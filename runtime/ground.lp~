@@ -1,0 +1,27 @@
+initiatedAt(fluent(fighting,id1,id2),69879).
+
+%initiatedAt(fluent(F,P1,P2),T):-
+%       fluentName(F),
+%       in_term(P1),
+%       person(P2),
+%       in_term(T).
+
+%term(X):-
+%    initiatedAt(fluent(X,_,_),_).
+
+%in_term(X):-
+%    initiatedAt(fluent(_,X,_),_).
+
+%term(X):-
+%    initiatedAt(fluent(_,_,X),_).
+
+%in_term(X):-
+%    initiatedAt(fluent(_,_,_),X).
+
+1{in_term(X):initiatedAt(fluent(_,X,_),_)}1.
+1{in_term(X):initiatedAt(fluent(_,_,_),X)}1.
+0{in_term(X):terminatedAt(fluent(_,_,_),X)}1.
+
+#hide.
+#show in_term/1.
+   

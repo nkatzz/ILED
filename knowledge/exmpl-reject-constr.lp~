@@ -1,0 +1,14 @@
+%:- example(holdsAt(driving_quality(X,Y,Z),T)), not holdsAt(driving_quality(X,Y,Z),T).
+:- holdsAt(driving_quality(X,Y,Z),T), not example(holdsAt(driving_quality(X,Y,Z),T)).
+:- holdsAt(driving_style(X,Y,Z),T), not example(holdsAt(driving_style(X,Y,Z),T)).
+:- holdsAt(punctuality(X,Y,Z),T), not example(holdsAt(punctuality(X,Y,Z),T)).
+:- holdsAt(sharp_turn(X,Y,Z),T), not example(holdsAt(sharp_turn(X,Y,Z),T)).
+:- holdsAt(abrupt_acceleration(X,Y,Z),T), not example(holdsAt(abrupt_acceleration(X,Y,Z),T)).
+:- holdsAt(abrupt_deceleration(X,Y,Z),T), not example(holdsAt(abrupt_deceleration(X,Y,Z),T)).
+:- holdsAt(passenger_density(X,Y,Z),T), not example(holdsAt(passenger_density(X,Y,Z),T)).
+:- holdsAt(noise_level(X,Y,Z),T), not example(holdsAt(noise_level(X,Y,Z),T)).
+:- holdsAt(internal_temperature(X,Y,Z),T), not example(holdsAt(internal_temperature(X,Y,Z),T)).
+
+
+
+test(X,Y,Z,T):- example(holdsAt(driving_quality(X,Y,Z),T)), not holdsAt(driving_quality(X,Y,Z),T).

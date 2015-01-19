@@ -1,0 +1,10 @@
+terminatedAt(fluent(meeting,X2,X3),X1):-
+        holdsAt(orntdiff(X3,X2,45),X1).
+
+%initiatedAt(fluent(meeting,X2,X3),X1):-
+%        happensAt(event(active,X2),X1),
+%        happensAt(event(inactive,X3),X1).
+
+
+
+#hide.

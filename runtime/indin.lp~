@@ -1,0 +1,62 @@
+%*
+
+initiatedAt(driving_quality(X3,X2,low),X1) :- use(1,0),try(1,1,vars(X2,X3,X1)),try(1,2,vars(X2,X3,X1)),try(1,3,vars(X2,X3,X1)),try(1,4,vars(X2,X3,X1)),try(1,5,vars(X2,X3,X1)),vehicleType(X2),ttime(X1),vehicleId(X3).
+try(1,1,vars(X2,X3,X1)) :- use(1,1),initiatedAt(punctuality(X3,X2,non_punctual),X1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,1,vars(X2,X3,X1)) :- not use(1,1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,2,vars(X2,X3,X1)) :- use(1,2),terminatedAt(punctuality(X3,X2,punctual),X1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,2,vars(X2,X3,X1)) :- not use(1,2),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,3,vars(X2,X3,X1)) :- use(1,3),holdsAt(punctuality(X3,X2,punctual),X1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,3,vars(X2,X3,X1)) :- not use(1,3),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,4,vars(X2,X3,X1)) :- use(1,4),holdsAt(driving_style(X3,X2,unsafe),X1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,4,vars(X2,X3,X1)) :- not use(1,4),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,5,vars(X2,X3,X1)) :- use(1,5),not_holdsAt(punctuality(X3,X2,non_punctual),X1),vehicleType(X2),vehicleId(X3),ttime(X1).
+try(1,5,vars(X2,X3,X1)) :- not use(1,5),vehicleType(X2),vehicleId(X3),ttime(X1).
+terminatedAt(driving_quality(X2,X1,low),X3) :- use(2,0),try(2,1,vars(X2,X3,X1)),try(2,2,vars(X2,X3,X1)),try(2,3,vars(X2,X3,X1)),try(2,4,vars(X2,X3,X1)),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,1,vars(X2,X3,X1)) :- use(2,1),holdsAt(punctuality(X2,X1,punctual),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,1,vars(X2,X3,X1)) :- not use(2,1),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,2,vars(X2,X3,X1)) :- use(2,2),holdsAt(driving_style(X2,X1,unsafe),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,2,vars(X2,X3,X1)) :- not use(2,2),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,3,vars(X2,X3,X1)) :- use(2,3),terminatedAt(driving_style(X2,X1,unsafe),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,3,vars(X2,X3,X1)) :- not use(2,3),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,4,vars(X2,X3,X1)) :- use(2,4),not_holdsAt(punctuality(X2,X1,non_punctual),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+try(2,4,vars(X2,X3,X1)) :- not use(2,4),vehicleId(X2),ttime(X3),vehicleType(X1).
+
+
+
+clauseIndex(1..2).
+
+literalIndex(0..6).
+
+{use(1,1..5)}.{use(2,1..4)}.
+
+
+
+{use(I,J)}:-clauseIndex(I),literalIndex(J).
+
+{use(I,J,K)}:-clauseIndex(I),clauseIndex(J),literalIndex(K).
+
+#minimize{use(I,J),use(I,J,K)}.
+
+:- use(I,J), not use(I,0).
+
+#hide.
+
+#show use/2.
+
+#show use/3.
+
+*%
+initiatedAt(driving_quality(X3,X2,low),X1) :- 
+        initiatedAt(punctuality(X3,X2,non_punctual),X1),
+        terminatedAt(punctuality(X3,X2,punctual),X1),
+        holdsAt(punctuality(X3,X2,punctual),X1),
+        holdsAt(driving_style(X3,X2,unsafe),X1),
+        not_holdsAt(punctuality(X3,X2,non_punctual),X1).
+
+terminatedAt(driving_quality(X2,X1,low),X3) :- 
+        holdsAt(punctuality(X2,X1,punctual),X3),
+        holdsAt(driving_style(X2,X1,unsafe),X3),
+        terminatedAt(driving_style(X2,X1,unsafe),X3),
+        not_holdsAt(punctuality(X2,X1,non_punctual),X3).
+
+

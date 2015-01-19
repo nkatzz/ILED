@@ -1,0 +1,12 @@
+initiatedAt(sharp_turn(X,Y,Z),T):-
+    happensAt(sharp_turn_start(X,Y,Z),T).
+terminatedAt(sharp_turn(X,Y,Z),T):-
+    happensAt(sharp_turn_end(X,Y,Z),T).
+initiatedAt(abrupt_acceleration(X,Y,Z),T):-
+    happensAt(abrupt_acceleration_start(X,Y,Z),T).
+terminatedAt(abrupt_acceleration(X,Y,Z),T):-
+    happensAt(abrupt_acceleration_end(X,Y,Z),T).
+initiatedAt(abrupt_deceleration(X,Y,Z),T):-
+    happensAt(abrupt_deceleration_start(X,Y,Z),T).
+terminatedAt(abrupt_deceleration(X,Y,Z),T):-
+    happensAt(abrupt_deceleration_end(X,Y,Z),T).

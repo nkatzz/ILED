@@ -1,0 +1,12 @@
+happensAt(event(abrupt1,id2),99999).
+orientation(id2,60,99999).
+holdsAt(invisible,id2,99999).
+coords(id2,85,83,99999).
+happensAt(event(running,id1),99999).
+orientation(id1,45,99999).
+holdsAt(invisible,id1,99999).
+coords(id1,92,97,99999).
+ttime(99999).
+ttime(100000).
+person(id1).
+person(id2).
