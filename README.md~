@@ -15,6 +15,8 @@ For information on Answer Set Programming (ASP) and the input language of ILED, 
 
 This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions; See the GNU General Public License v3 for more details.
 
+## Using ILED (batch mode)
+
 To use ILED you need to provide the following with the input:
 
 1) Some background knowledge in ASP format. To do so, edit the `/knowledge/bk.lp` file with your own input.
@@ -31,10 +33,10 @@ You also need to specify the target predicate(s) pattern. These are typically so
 
 Once you have prepared the input, you run the system by running the /src/main.py script. This is a simple way to use ILED in "batch" mode, i.e. by providing all examples at once and trying to learn a hypothesis. However, ILED has been designed for scalable learning from large volumes of data, in cases where processing all data at once is intractable, or where data arrive over time. It thus operates also in an incremental mode, constructing a hypothesis from the first available piece of data, and revising it as long as new data arrives, while revisions account for the whole set of accumulated expirience. To implement this functionality, ILED relies on an external database (mongodb) the serves as a historical memory. So you can set up your data storage in a mongodb instance and run ILED to learn incrementally.
 
-# Using ILED incrementaly
+## Using ILED (incremental mode)
 
-The best way to see how this works is to run ILED on the data provided here. ILED has been evaluated on two large-scale event recognition applications: Activity Recognition and City Transport Management. 
+The best way to see how this works is to run ILED on the data provided here. ILED has been evaluated on two large-scale event recognition applications: Activity Recognition and City Transport Management. For both these domains, data and necessary knowledge (background knowledge and mode declarations) are provided. 
 
 #### City Transport Management (CTM)
 
-The CTM dataset was created in the context of the [PRONTO project](http://www.ict-pronto.org/)
+The CTM dataset was created in the context of the [PRONTO project](http://www.ict-pronto.org/). For information of this dataset, please consult [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download the dataset, along with information on how to set-up mongodb, import the data from the provided JSON dump and run ILED from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/)
