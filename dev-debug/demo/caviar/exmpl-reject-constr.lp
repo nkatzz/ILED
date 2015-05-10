@@ -1,0 +1,1 @@
+:- holdsAt(fluent(X,Y,Z),T), not example(holdsAt(fluent(X,Y,Z),T)).
