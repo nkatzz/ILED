@@ -1,5 +1,4 @@
-# ILED
-Incremental Learning Event Definitions
+# ILED (Incremental Learning Event Definitions)
 
 
 ILED is an incremental Inductive Logic Programming system. It has been designed for scalable learning of logical theories from large amounts of sequential data with a time-like structure. ILED been created having in mind the construction of event-based knowledge bases, to be used in event recognition applications, but it can practically be used within any domain where ILP is applicable. It is based on Abductive-Inductive Logic Programming and it is implemented in Python 2.7, using an ASL solver (Clingo) as the main reasoning Component. Please consult the following papers to get a grasp on the theory behind ILED:
