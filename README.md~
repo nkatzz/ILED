@@ -41,6 +41,4 @@ The best way to see how this works is to run ILED on the data provided here. ILE
 
 The CTM dataset was created in the context of the [PRONTO project](http://www.ict-pronto.org/). For information of this dataset, please consult [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download the dataset, along with information on how to set-up mongodb, import the data from the provided JSON dumps and run ILED from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/CTM.tar.gz)
 
-#### Activity Recognition (CAVIAR)
 
-See [this link](http://homepages.inf.ed.ac.uk/rbf/CAVIARDATA1/) for information on the CAVIAR dataset. You can also find more information on the dataset itself and the way it has been used for learning with ILED in [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download data plus instructions on how to perform learning with ILED from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/CAVIAR.tar.gz)
