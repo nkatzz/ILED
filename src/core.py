@@ -62,7 +62,7 @@ class core():
     
     #db_name,db_collection = 'examples-3-8-2013_granularity_50','examples'
     #db_name,db_collection = 'caviar-synthetic_granularity_100','examples'
-    db_name,db_collection = 'CTM-granularity-20','examples'
+    db_name,db_collection = 'CTM-G-50','examples'
     #db_name,db_collection = 'CTM-granularity-10','examples'
     
     db,collection,globals = None,None,None

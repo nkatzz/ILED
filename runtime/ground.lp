@@ -1,6 +1,10 @@
-not_happensAt(my_stop_leave(id75,bus,stopId,late),1004).
+initiatedAt(driving_style(id75,bus,unsafe),350).
 
-{term(X,stopId):not_happensAt(my_stop_leave(_,_,X,_),_)}.
-{term(X,fv_my_stop_leave):not_happensAt(my_stop_leave(_,_,_,X),_)}.
+{term(X,vehicleId):initiatedAt(driving_style(X,_,_),_)}.
+{term(X,vehicleType):initiatedAt(driving_style(_,X,_),_)}.
+{term(X,ttime):initiatedAt(driving_style(_,_,_),X)}.
+{term(X,vehicleId):terminatedAt(driving_style(X,_,_),_)}.
+{term(X,vehicleType):terminatedAt(driving_style(_,X,_),_)}.
+{term(X,ttime):terminatedAt(driving_style(_,_,_),X)}.
 #hide.
 #show term/2.

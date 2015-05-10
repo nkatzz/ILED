@@ -14,8 +14,7 @@ holdsAt(F,T) :-
        starttime(T),
        example(holdsAt(F,T)).
  
-% Extra BK:
-
+% Extra Background knowledge start:
 
 terminatedAt(sharp_turn(X2,X1,sharp),X3) :- 
         happensAt(sharp_turn_end(X2,X1,sharp),X3).
@@ -46,164 +45,12 @@ initiatedAt(abrupt_deceleration(X3,X1,abrupt),X2) :-
 initiatedAt(abrupt_deceleration(X3,X1,very_abrupt),X2) :- 
         happensAt(abrupt_deceleration_start(X3,X1,very_abrupt),X2).
 
-
-terminatedAt(passenger_density(X3,X1,high),X2) :- 
-        happensAt(passenger_density_change(X3,X1,low),X2).
-initiatedAt(passenger_density(X3,X1,high),X2) :- 
-        happensAt(passenger_density_change(X3,X1,high),X2).
-    
-
-terminatedAt(noise_level(X3,X1,high),X2) :- 
-        happensAt(noise_level_change(X3,X1,low),X2).
-initiatedAt(noise_level(X3,X2,high),X1) :- 
-        happensAt(noise_level_change(X3,X2,high),X1).  
-
-
-terminatedAt(internal_temperature(X3,X1,very_cold),X2) :- 
-        happensAt(internal_temperature_change(X3,X1,very_warm),X2).
-initiatedAt(internal_temperature(X3,X2,very_cold),X1) :- 
-        happensAt(internal_temperature_change(X3,X2,very_cold),X1).
-terminatedAt(internal_temperature(X3,X1,very_cold),X2) :- 
-        happensAt(internal_temperature_change(X3,X1,cold),X2).
-terminatedAt(internal_temperature(X3,X1,very_cold),X2) :- 
-        happensAt(noise_level_change(X3,X1,low),X2),
-        happensAt(internal_temperature_change(X3,X1,very_warm),X2).
-terminatedAt(internal_temperature(X3,X1,very_cold),X2) :- 
-        happensAt(internal_temperature_change(X3,X1,warm),X2).
-terminatedAt(internal_temperature(X3,X1,very_cold),X2) :- 
-        happensAt(internal_temperature_change(X3,X1,normal),X2).
-
-
-terminatedAt(punctuality(X3,X1,non_punctual),X2) :- 
-        happensAt(my_stop_enter(X3,X1,stopId,early),X2).
-initiatedAt(punctuality(X3,X1,punctual),X2) :- 
-        happensAt(my_stop_enter(X3,X1,stopId,early),X2).
-terminatedAt(punctuality(X3,X1,non_punctual),X2) :- 
-        happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2).
-terminatedAt(punctuality(X2,X1,punctual),X3) :- 
-        happensAt(my_stop_enter(X2,X1,stopId,late),X3).
-initiatedAt(punctuality(X3,X1,non_punctual),X2) :- 
-        happensAt(my_stop_leave(X3,X1,stopId,early),X2).
-initiatedAt(punctuality(X2,X1,non_punctual),X3) :- 
-        happensAt(my_stop_enter(X2,X1,stopId,late),X3).
-terminatedAt(punctuality(X3,X1,punctual),X2) :- 
-        happensAt(my_stop_leave(X3,X1,stopId,early),X2).
-initiatedAt(punctuality(X3,X1,punctual),X2) :- 
-        happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2).
-
-
-
-%*
-initiatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(sharp_turn_start(X3,X1,very_sharp),X2).
-terminatedAt(driving_style(X3,X2,unsafe),X1) :- 
-        happensAt(abrupt_deceleration_end(X3,X2,very_abrupt),X1),
-        not holdsAt(abrupt_acceleration(X3,X2,very_abrupt),X1),
-        not holdsAt(sharp_turn(X3,X2,very_sharp),X1).
-terminatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(sharp_turn_end(X3,X1,sharp),X2),
-        not holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),
-        happensAt(abrupt_acceleration_end(X3,X1,very_abrupt),X2).
-initiatedAt(driving_style(X2,X1,unsafe),X3) :- 
-        happensAt(abrupt_acceleration_start(X2,X1,very_abrupt),X3).
-terminatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(sharp_turn_end(X3,X1,very_sharp),X2),
-        holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),
-        holdsAt(abrupt_deceleration(X3,X1,abrupt),X2).
-initiatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(abrupt_deceleration_start(X3,X1,very_abrupt),X2).
-terminatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(abrupt_acceleration_end(X3,X1,very_abrupt),X2),
-        not happensAt(abrupt_deceleration_end(X3,X1,very_abrupt),X2),
-        not holdsAt(sharp_turn(X3,X1,very_sharp),X2),
-        not holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2).
-terminatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        happensAt(sharp_turn_end(X3,X1,very_sharp),X2),
-        not holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),
-        not holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2).
-*%
-
-
-
-%% Learnt with minimal modes for driving_quality
-
-%initiatedAt(driving_quality(X2,X1,low),X3) :- 
-%        happensAt(my_stop_enter(X2,X1,stopId,late),X3),
-%        holdsAt(driving_style(X2,X1,unsafe),X3).
-%initiatedAt(driving_quality(X3,X1,low),X2) :- 
-%        initiatedAt(driving_style(X3,X1,unsafe),X2),
-%        not_holdsAt(punctuality(X3,X1,punctual),X2),
-%        holdsAt(punctuality(X3,X1,non_punctual),X2),
-%        not_holdsAt(driving_style(X3,X1,unsafe),X2).
-%terminatedAt(driving_quality(X3,X1,low),X2) :- 
-%        terminatedAt(driving_style(X3,X1,unsafe),X2).
-%initiatedAt(driving_quality(X3,X2,low),X1) :- 
-%        happensAt(my_stop_leave(X3,X2,stopId,early),X1),
-%        holdsAt(punctuality(X3,X2,punctual),X1),
-%        holdsAt(driving_style(X3,X2,unsafe),X1).
-%terminatedAt(driving_quality(X3,X1,low),X2) :- 
-%        happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2).
+% Extra Background knowledge end:
 
 
 
 
 
-
-%*
-terminatedAt(passenger_satisfaction(X3,X1,reducing),X2) :- 
-        terminatedAt(passenger_density(X3,X1,high),X2),
-        not_holdsAt(noise_level(X3,X1,high),X2),
-        not_holdsAt(internal_temperature(X3,X1,very_cold),X2).
-initiatedAt(passenger_satisfaction(X3,X2,reducing),X1) :- 
-        initiatedAt(internal_temperature(X3,X2,very_cold),X1),
-        not_holdsAt(abrupt_deceleration(X3,X2,very_abrupt),X1).
-terminatedAt(passenger_satisfaction(X3,X1,reducing),X2) :- 
-        initiatedAt(abrupt_acceleration(X3,X1,very_abrupt),X2),
-        initiatedAt(driving_quality(X3,X1,low),X2).
-terminatedAt(passenger_satisfaction(X3,X1,reducing),X2) :- 
-        terminatedAt(noise_level(X3,X1,high),X2),
-        holdsAt(abrupt_deceleration(X3,X1,abrupt),X2).
-initiatedAt(passenger_satisfaction(X3,X1,reducing),X2) :- 
-        initiatedAt(passenger_density(X3,X1,high),X2),
-        not_holdsAt(noise_level(X3,X1,high),X2).
-initiatedAt(passenger_satisfaction(X3,X2,reducing),X1) :- 
-        holdsAt(driving_style(X3,X2,unsafe),X1),
-        holdsAt(punctuality(X3,X2,non_punctual),X1),
-        not_holdsAt(noise_level(X3,X2,high),X1).
-terminatedAt(passenger_satisfaction(X2,X1,reducing),X3) :- 
-        initiatedAt(sharp_turn(X2,X1,sharp),X3),
-        holdsAt(abrupt_deceleration(X2,X1,very_abrupt),X3).
-*%
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%*
-:-initiatedAt(driving_quality(A,B,C),D),terminatedAt(driving_quality(A,B,C),D).
-:-initiatedAt(passenger_satisfaction(A,B,C),D),terminatedAt(passenger_satisfaction(A,B,C),D).
-:-initiatedAt(driving_style(A,B,C),D),terminatedAt(driving_style(A,B,C),D).
-:-initiatedAt(punctuality(A,B,C),D),terminatedAt(punctuality(A,B,C),D).
-:-initiatedAt(sharp_turn(A,B,C),D),terminatedAt(sharp_turn(A,B,C),D).
-:-initiatedAt(abrupt_acceleration(A,B,C),D),terminatedAt(abrupt_acceleration(A,B,C),D).
-:-initiatedAt(abrupt_deceleration(A,B,C),D),terminatedAt(abrupt_deceleration(A,B,C),D).
-:-initiatedAt(passenger_density(A,B,C),D),terminatedAt(passenger_density(A,B,C),D).
-:-initiatedAt(noise_level(A,B,C),D),terminatedAt(noise_level(A,B,C),D).
-:-initiatedAt(internal_temperature(A,B,C),D),terminatedAt(internal_temperature(A,B,C),D).
-*%
 
 
 
@@ -326,10 +173,6 @@ not_happensAt(sharp_turn_start(X,Y,Z),T):-
         not happensAt(sharp_turn_start(X,Y,Z),T),
         vehicleId(X),vehicleType(Y),fv_passenger_density(Z),ttime(T).
 
-not_happensAt(sharp_turn_start(X,Y,Z),T):-
-        not happensAt(sharp_turn_start(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_sharp_turn(Z),ttime(T).
-
 not_happensAt(sharp_turn_end(X,Y,Z),T):-
         not happensAt(sharp_turn_end(X,Y,Z),T),
         vehicleId(X),vehicleType(Y),fv_sharp_turn(Z),ttime(T).
@@ -434,18 +277,9 @@ fv_my_stop_leave(early).
 fv_my_stop_leave(scheduled).
 
 
-%negsCovered(X,Y,Z,T):-holdsAt(driving_quality(X,Y,Z),T), not example(holdsAt(driving_quality(X,Y,Z),T)).
-%posNotCovered(X,Y,Z,T):-holdsAt(driving_quality(X,Y,Z),T), not example(holdsAt(driving_quality(X,Y,Z),T)).
+
 
 #hide.
 	
-%#show negsCovered(X,Y,Z,T).
-%#show posNotCovered(X,Y,Z,T).
 
-
-%#show ttime/1.
-%#show vehicleType/1.
-%#show vehicleId/1.
-%#show holdsAt/2.
-%#show ttime/1.
 

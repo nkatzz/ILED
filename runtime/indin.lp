@@ -1,81 +1,106 @@
-initiatedAt(punctuality(X3,X1,punctual),X2) :- use(1,0),try(1,1,vars(X2,X3,X1)),try(1,2,vars(X2,X3,X1)),try(1,3,vars(X2,X3,X1)),try(1,4,vars(X2,X3,X1)),try(1,5,vars(X2,X3,X1)),try(1,6,vars(X2,X3,X1)),try(1,7,vars(X2,X3,X1)),try(1,8,vars(X2,X3,X1)),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,1,vars(X2,X3,X1)) :- use(1,1),initiatedAt(punctuality(X3,X1,punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,1,vars(X2,X3,X1)) :- not use(1,1),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,2,vars(X2,X3,X1)) :- use(1,2),terminatedAt(punctuality(X3,X1,non_punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,2,vars(X2,X3,X1)) :- not use(1,2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,3,vars(X2,X3,X1)) :- use(1,3),happensAt(my_stop_enter(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,3,vars(X2,X3,X1)) :- not use(1,3),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,4,vars(X2,X3,X1)) :- use(1,4),not_happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,4,vars(X2,X3,X1)) :- not use(1,4),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,5,vars(X2,X3,X1)) :- use(1,5),not_happensAt(my_stop_enter(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,5,vars(X2,X3,X1)) :- not use(1,5),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,6,vars(X2,X3,X1)) :- use(1,6),not_happensAt(my_stop_leave(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,6,vars(X2,X3,X1)) :- not use(1,6),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,7,vars(X2,X3,X1)) :- use(1,7),not_happensAt(my_stop_leave(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,7,vars(X2,X3,X1)) :- not use(1,7),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,8,vars(X2,X3,X1)) :- use(1,8),not_happensAt(my_stop_leave(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(1,8,vars(X2,X3,X1)) :- not use(1,8),ttime(X2),vehicleId(X3),vehicleType(X1).
-initiatedAt(punctuality(X3,X1,non_punctual),X2) :- use(2,0),try(2,1,vars(X2,X3,X1)),try(2,2,vars(X2,X3,X1)),try(2,3,vars(X2,X3,X1)),try(2,4,vars(X2,X3,X1)),try(2,5,vars(X2,X3,X1)),try(2,6,vars(X2,X3,X1)),try(2,7,vars(X2,X3,X1)),try(2,8,vars(X2,X3,X1)),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,1,vars(X2,X3,X1)) :- use(2,1),initiatedAt(punctuality(X3,X1,non_punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,1,vars(X2,X3,X1)) :- not use(2,1),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,2,vars(X2,X3,X1)) :- use(2,2),terminatedAt(punctuality(X3,X1,punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,2,vars(X2,X3,X1)) :- not use(2,2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,3,vars(X2,X3,X1)) :- use(2,3),happensAt(my_stop_enter(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,3,vars(X2,X3,X1)) :- not use(2,3),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,4,vars(X2,X3,X1)) :- use(2,4),not_happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,4,vars(X2,X3,X1)) :- not use(2,4),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,5,vars(X2,X3,X1)) :- use(2,5),not_happensAt(my_stop_enter(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,5,vars(X2,X3,X1)) :- not use(2,5),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,6,vars(X2,X3,X1)) :- use(2,6),not_happensAt(my_stop_leave(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,6,vars(X2,X3,X1)) :- not use(2,6),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,7,vars(X2,X3,X1)) :- use(2,7),not_happensAt(my_stop_leave(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,7,vars(X2,X3,X1)) :- not use(2,7),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,8,vars(X2,X3,X1)) :- use(2,8),not_happensAt(my_stop_leave(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(2,8,vars(X2,X3,X1)) :- not use(2,8),ttime(X2),vehicleId(X3),vehicleType(X1).
-terminatedAt(punctuality(X3,X1,non_punctual),X2) :- use(3,0),try(3,1,vars(X2,X3,X1)),try(3,2,vars(X2,X3,X1)),try(3,3,vars(X2,X3,X1)),try(3,4,vars(X2,X3,X1)),try(3,5,vars(X2,X3,X1)),try(3,6,vars(X2,X3,X1)),try(3,7,vars(X2,X3,X1)),try(3,8,vars(X2,X3,X1)),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,1,vars(X2,X3,X1)) :- use(3,1),initiatedAt(punctuality(X3,X1,punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,1,vars(X2,X3,X1)) :- not use(3,1),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,2,vars(X2,X3,X1)) :- use(3,2),terminatedAt(punctuality(X3,X1,non_punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,2,vars(X2,X3,X1)) :- not use(3,2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,3,vars(X2,X3,X1)) :- use(3,3),happensAt(my_stop_enter(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,3,vars(X2,X3,X1)) :- not use(3,3),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,4,vars(X2,X3,X1)) :- use(3,4),not_happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,4,vars(X2,X3,X1)) :- not use(3,4),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,5,vars(X2,X3,X1)) :- use(3,5),not_happensAt(my_stop_enter(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,5,vars(X2,X3,X1)) :- not use(3,5),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,6,vars(X2,X3,X1)) :- use(3,6),not_happensAt(my_stop_leave(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,6,vars(X2,X3,X1)) :- not use(3,6),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,7,vars(X2,X3,X1)) :- use(3,7),not_happensAt(my_stop_leave(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,7,vars(X2,X3,X1)) :- not use(3,7),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,8,vars(X2,X3,X1)) :- use(3,8),not_happensAt(my_stop_leave(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(3,8,vars(X2,X3,X1)) :- not use(3,8),ttime(X2),vehicleId(X3),vehicleType(X1).
-terminatedAt(punctuality(X3,X1,punctual),X2) :- use(4,0),try(4,1,vars(X2,X3,X1)),try(4,2,vars(X2,X3,X1)),try(4,3,vars(X2,X3,X1)),try(4,4,vars(X2,X3,X1)),try(4,5,vars(X2,X3,X1)),try(4,6,vars(X2,X3,X1)),try(4,7,vars(X2,X3,X1)),try(4,8,vars(X2,X3,X1)),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,1,vars(X2,X3,X1)) :- use(4,1),initiatedAt(punctuality(X3,X1,non_punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,1,vars(X2,X3,X1)) :- not use(4,1),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,2,vars(X2,X3,X1)) :- use(4,2),terminatedAt(punctuality(X3,X1,punctual),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,2,vars(X2,X3,X1)) :- not use(4,2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,3,vars(X2,X3,X1)) :- use(4,3),happensAt(my_stop_enter(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,3,vars(X2,X3,X1)) :- not use(4,3),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,4,vars(X2,X3,X1)) :- use(4,4),not_happensAt(my_stop_enter(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,4,vars(X2,X3,X1)) :- not use(4,4),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,5,vars(X2,X3,X1)) :- use(4,5),not_happensAt(my_stop_enter(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,5,vars(X2,X3,X1)) :- not use(4,5),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,6,vars(X2,X3,X1)) :- use(4,6),not_happensAt(my_stop_leave(X3,X1,stopId,scheduled),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,6,vars(X2,X3,X1)) :- not use(4,6),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,7,vars(X2,X3,X1)) :- use(4,7),not_happensAt(my_stop_leave(X3,X1,stopId,early),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,7,vars(X2,X3,X1)) :- not use(4,7),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,8,vars(X2,X3,X1)) :- use(4,8),not_happensAt(my_stop_leave(X3,X1,stopId,late),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
-try(4,8,vars(X2,X3,X1)) :- not use(4,8),ttime(X2),vehicleId(X3),vehicleType(X1).
 
 
+initiatedAt(driving_style(X3,X1,unsafe),X2) :- initiatedAt(sharp_turn(X3,X1,very_sharp),X2),not expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,1),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,2),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,3),not not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,4),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,5),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,1,6),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+initiatedAt(driving_style(X3,X1,unsafe),X2) :- initiatedAt(sharp_turn(X3,X1,very_sharp),X2),not expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,1),not initiatedAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,2),not holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,3),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,4),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,5),not not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,6),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,2,7),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+initiatedAt(driving_style(X3,X1,unsafe),X2) :- initiatedAt(sharp_turn(X3,X1,very_sharp),X2),not expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,1),not initiatedAt(sharp_turn(X2,X1,very_sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,2),not holdsAt(abrupt_deceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,3),not holdsAt(abrupt_acceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,4),not not_holdsAt(sharp_turn(X2,X1,very_sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,5),not not_holdsAt(sharp_turn(X2,X1,sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,6),not not_holdsAt(abrupt_acceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(1,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(1,3,7),not not_holdsAt(abrupt_deceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+terminatedAt(driving_style(X3,X1,unsafe),X2) :- terminatedAt(sharp_turn(X3,X1,very_sharp),X2),holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),not expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,1,1),not holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,1,2),not holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,1,3),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,1,4),not not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,1,5),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+terminatedAt(driving_style(X3,X1,unsafe),X2) :- terminatedAt(sharp_turn(X3,X1,very_sharp),X2),holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),not expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,1),not terminatedAt(sharp_turn(X3,X2,very_sharp),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,2),not terminatedAt(abrupt_acceleration(X3,X2,abrupt),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,3),not holdsAt(abrupt_acceleration(X3,X2,abrupt),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,4),not holdsAt(sharp_turn(X3,X2,very_sharp),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,5),not not_holdsAt(sharp_turn(X3,X2,sharp),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,6),not not_holdsAt(abrupt_acceleration(X3,X2,very_abrupt),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,7),not not_holdsAt(abrupt_deceleration(X3,X2,very_abrupt),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+expt(2,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(2,2,8),not not_holdsAt(abrupt_deceleration(X3,X2,abrupt),X1),vehicleType(X2),vehicleId(X3),ttime(X1),ttime(X2),vehicleType(X1).
+initiatedAt(driving_style(X3,X1,unsafe),X2) :- initiatedAt(abrupt_deceleration(X3,X1,very_abrupt),X2),not expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,1),not initiatedAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,2),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,3),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,4),not not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,5),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,6),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,1,7),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+initiatedAt(driving_style(X3,X1,unsafe),X2) :- initiatedAt(abrupt_deceleration(X3,X1,very_abrupt),X2),not expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,1),not initiatedAt(abrupt_deceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,2),not holdsAt(abrupt_acceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,3),not not_holdsAt(sharp_turn(X2,X1,very_sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,4),not not_holdsAt(sharp_turn(X2,X1,sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,5),not not_holdsAt(abrupt_acceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,6),not not_holdsAt(abrupt_deceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+expt(3,initiatedAt(driving_style(X3,X1,unsafe),X2)) :- use(3,2,7),not not_holdsAt(abrupt_deceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1),ttime(X2),vehicleId(X3).
+terminatedAt(driving_style(X3,X1,unsafe),X2) :- terminatedAt(sharp_turn(X3,X1,sharp),X2),terminatedAt(abrupt_acceleration(X3,X1,very_abrupt),X2),not expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,1),not holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,2),not holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,3),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,4),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,5),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(4,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(4,1,6),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+terminatedAt(driving_style(X2,X1,unsafe),X3) :- terminatedAt(abrupt_deceleration(X2,X1,very_abrupt),X3),not_holdsAt(abrupt_acceleration(X2,X1,very_abrupt),X3),not_holdsAt(sharp_turn(X2,X1,very_sharp),X3),not expt(5,terminatedAt(driving_style(X2,X1,unsafe),X3)),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(5,terminatedAt(driving_style(X2,X1,unsafe),X3)) :- use(5,1,1),not holdsAt(abrupt_deceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(5,terminatedAt(driving_style(X2,X1,unsafe),X3)) :- use(5,1,2),not not_holdsAt(sharp_turn(X2,X1,sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(5,terminatedAt(driving_style(X2,X1,unsafe),X3)) :- use(5,1,3),not not_holdsAt(abrupt_acceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(5,terminatedAt(driving_style(X2,X1,unsafe),X3)) :- use(5,1,4),not not_holdsAt(abrupt_deceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+initiatedAt(driving_style(X2,X1,unsafe),X3) :- initiatedAt(abrupt_acceleration(X2,X1,very_abrupt),X3),not expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,1),not initiatedAt(sharp_turn(X2,X1,sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,2),not holdsAt(abrupt_deceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,3),not not_holdsAt(sharp_turn(X2,X1,very_sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,4),not not_holdsAt(sharp_turn(X2,X1,sharp),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,5),not not_holdsAt(abrupt_acceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,6),not not_holdsAt(abrupt_acceleration(X2,X1,abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,1,7),not not_holdsAt(abrupt_deceleration(X2,X1,very_abrupt),X3),vehicleId(X2),ttime(X3),vehicleType(X1).
+initiatedAt(driving_style(X2,X1,unsafe),X3) :- initiatedAt(abrupt_acceleration(X2,X1,very_abrupt),X3),not expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)),vehicleId(X2),ttime(X3),vehicleType(X1).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,1),not initiatedAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,2),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,3),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,4),not not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,5),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,6),not not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+expt(6,initiatedAt(driving_style(X2,X1,unsafe),X3)) :- use(6,2,7),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1),vehicleId(X2),ttime(X3).
+terminatedAt(driving_style(X3,X1,unsafe),X2) :- terminatedAt(sharp_turn(X3,X1,very_sharp),X2),not_holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),not expt(7,terminatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(7,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(7,1,1),not holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(7,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(7,1,2),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(7,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(7,1,3),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(7,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(7,1,4),not not_holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+terminatedAt(driving_style(X3,X1,unsafe),X2) :- terminatedAt(abrupt_acceleration(X3,X1,very_abrupt),X2),not_holdsAt(abrupt_deceleration(X3,X1,very_abrupt),X2),not expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(8,1,1),not holdsAt(abrupt_acceleration(X3,X1,very_abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(8,1,2),not holdsAt(abrupt_deceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(8,1,3),not not_holdsAt(sharp_turn(X3,X1,very_sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(8,1,4),not not_holdsAt(sharp_turn(X3,X1,sharp),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
+expt(8,terminatedAt(driving_style(X3,X1,unsafe),X2)) :- use(8,1,5),not not_holdsAt(abrupt_acceleration(X3,X1,abrupt),X2),ttime(X2),vehicleId(X3),vehicleType(X1).
 
-clauseIndex(1..4).
+clauseIndex(1..8).
 
 literalIndex(0..9).
 
-{use(1,1..8)}.{use(2,1..8)}.{use(3,1..8)}.{use(4,1..8)}.
 
 
+{use(1,1,1..7)}.{use(1,2,1..8)}.{use(1,3,1..7)}.{use(2,1,1..7)}.{use(2,2,1..8)}.{use(3,1,1..8)}.{use(3,2,1..7)}.{use(4,1,1..8)}.{use(5,1,1..7)}.{use(6,1,1..8)}.{use(6,2,1..7)}.{use(7,1,1..7)}.{use(8,1,1..7)}.
 
 {use(I,J)}:-clauseIndex(I),literalIndex(J).
 
