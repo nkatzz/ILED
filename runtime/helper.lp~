@@ -1,5 +1,0 @@
-initiatedAt(driving_style(X3,X1,unsafe),X2) :- 
-        not_happensAt(passenger_density_change(X3,X1,low),X2),
-        ttime(X2),
-        vehicleId(X3),
-        vehicleType(X1).
