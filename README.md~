@@ -39,4 +39,4 @@ The best way to see how this works is to run ILED on the data provided here. ILE
 
 #### City Transport Management (CTM)
 
-The CTM dataset was created in the context of the [PRONTO project](http://www.ict-pronto.org/). For information of this dataset, please consult [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download the dataset, along with information on how to set-up mongodb, import the data from the provided JSON dump and run ILED from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/)
+The CTM dataset was created in the context of the [PRONTO project](http://www.ict-pronto.org/). For information of this dataset, please consult [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download the dataset, along with information on how to set-up mongodb, import the data from the provided JSON dumps and run ILED from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/CTM.tar.gz)
