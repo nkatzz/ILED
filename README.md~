@@ -37,13 +37,10 @@ The output hypothesis is written in ``./theory.lp``. This is a simple way to use
 
 * O. Ray. Nonmonotonic Abductive Inductive Learning. Journal of Applied Logic 7(3): 329-340, 2009.
 
-related to the metabolism of the bacterium E. coli. Please consult the above paper for details on this case study. To run the example:
+related to the metabolism of the bacterium E. coli. To run the example:
 
 1) Copy the contents of ``/knowledge/ecoli/bk.lp``, ``/knowledge/ecoli/modes.pl`` and ``/knowledge/ecoli/examples.lp`` into the corresponding files under the ``/knowledge`` directory of ``ILED``'s source code.
-
-2) Edit `/src/core.py` so that `example_patterns` looks like this: ``example_patterns = ['holdsAt(available(S),T)']``
- 
-3) Run `/src$ python main.py mode=batch`. 
+2) Edit  and run `/src$ python main.py mode=batch`. Please consult the above paper for details on this case study.
 
 ## Using ILED (incremental mode)
 
