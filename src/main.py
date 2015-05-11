@@ -10,38 +10,6 @@ import utils
 import sys
 import argparse
 
-"""
-To Do:
-
-1. Pass args to the main learning function:
-  - DB name
-  - Granularity ?
-  - example pattern
-  - running modes? (experiments, sequential run, runs on randomly exmaples...)
-  
-2. Implement support update as in paper (hopefully this will fix all remaining 
-   support set problems)  
-
-3. Print informative statements throughout execution
-
-4. CROSS-VALIDATION 
-
-5. FIX +/- mode declarations (!!!)
-
-6. Implement a file-based (runs simply XHAIL) and a db-based (runs ILED) version.
-   Have some examples for the file based and an easy to install test for the 
-   database version.  
-
-
-"""
-"""
-Fix mongo connectivity issues:
-Manually remove the lockfile: sudo rm /var/lib/mongodb/mongod.lock
-Run the repair script: sudo -u mongodb mongod -f /etc/mongodb.conf --repair
-tart your MongoDB server with sudo start mongodb and verify it is running with sudo 
-status mongodb and by trying to connect to it with mongo test.
-"""
-
 
 gl = core.global_vals
 
@@ -72,10 +40,6 @@ def learn(**kwargs):
     #for i in time_interval:
     #for i in range(1,100000):
     for i in range(1,1000000):    
-        
-    #for i in (110,120):    
-        #i = 250
-        #print(i)
         if i == 1672:
             stop = 'stop'
         if utils.get_example(i):
@@ -121,19 +85,18 @@ def learn(**kwargs):
                      usedict='clear',updatexmpl=i)                       
             found_new_clauses = False
         
-def runFromFile():
+def batchMode():
     u.clear_prior()
-    hs,scs,cls,incsolve = False,False,False,False
     (newclauses,retained,specialized) = ([],[],[])
     (newclauses,retained,specialized) = \
                     u.revise(is_new_example=True,
                     debug=False,
                     newcl=newclauses,
                     refcl=specialized,
-                    retcl=retained,heuristic_search=hs,
-                    set_cover_search=scs,
-                    clause_level_search=cls,
-                    incremental_solve=incsolve)  
+                    retcl=retained,heuristic_search=False,
+                    set_cover_search=False,
+                    clause_level_search=False,
+                    incremental_solve=False)   
         
         
 if __name__ == "__main__":
@@ -149,13 +112,9 @@ if __name__ == "__main__":
         learn(heuristic_search=True)  
     elif 'clause_level_search' in args and args['clause_level_search']:
         learn(clause_level_search=True) 
-    
-    elif 'demo' in args: # demo=caviar or demo=ctm
-        if args['demo'] == 'caviar':
-            runFromFile('caviar')
-        else: # ctm
-            runFromFile('ctm')
-                 
+    elif 'mode' in args: # demo=caviar or demo=ctm
+        if args['mode'] == 'batch':
+            batchMode()
     else:    
         learn()
         #print('What you want to do?')    

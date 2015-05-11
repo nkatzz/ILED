@@ -1,51 +1,9 @@
-2015-05-10 21:05:13,343 INFO [@EXMPL 50:] Trying to find delta set of size 4
-2015-05-10 21:05:13,372 INFO [@EXMPL 50] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),4)', 'initiatedAt(driving_style(id75,bus,unsafe),42)', 'terminatedAt(driving_style(id75,bus,unsafe),38)', 'terminatedAt(driving_style(id75,bus,unsafe),47)']
-2015-05-10 21:05:14,741 INFO [@EXMPL 50:] Found new Kernel Set
-2015-05-10 21:05:15,182 INFO [@EXMPL 100:] Trying to find delta set of size 4
-2015-05-10 21:05:15,216 INFO [@EXMPL 100:] Trying to find delta set of size 6
-2015-05-10 21:05:15,253 INFO [@EXMPL 100:] Trying to find delta set of size 8
-2015-05-10 21:05:15,289 INFO [@EXMPL 100:] Trying to find delta set of size 10
-2015-05-10 21:05:15,319 INFO [@EXMPL 100] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),51)', 'initiatedAt(driving_style(id75,bus,unsafe),75)', 'initiatedAt(driving_style(id75,bus,unsafe),85)', 'initiatedAt(driving_style(id75,bus,unsafe),93)', 'initiatedAt(driving_style(id75,bus,unsafe),58)', 'terminatedAt(driving_style(id75,bus,unsafe),55)', 'terminatedAt(driving_style(id75,bus,unsafe),64)', 'terminatedAt(driving_style(id75,bus,unsafe),78)', 'terminatedAt(driving_style(id75,bus,unsafe),87)']
-2015-05-10 21:05:18,494 INFO [@EXMPL 100:] Found new Kernel Set
-2015-05-10 21:05:19,487 INFO [@EXMPL 150:] Trying to find delta set of size 4
-2015-05-10 21:05:19,525 INFO [@EXMPL 150:] Trying to find delta set of size 6
-2015-05-10 21:05:19,555 INFO [@EXMPL 150:] Trying to find delta set of size 8
-2015-05-10 21:05:19,585 INFO [@EXMPL 150:] Trying to find delta set of size 10
-2015-05-10 21:05:19,615 INFO [@EXMPL 150] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),106)', 'initiatedAt(driving_style(id75,bus,unsafe),123)', 'initiatedAt(driving_style(id75,bus,unsafe),134)', 'initiatedAt(driving_style(id75,bus,unsafe),141)', 'terminatedAt(driving_style(id75,bus,unsafe),103)', 'terminatedAt(driving_style(id75,bus,unsafe),117)', 'terminatedAt(driving_style(id75,bus,unsafe),136)', 'terminatedAt(driving_style(id75,bus,unsafe),144)', 'terminatedAt(driving_style(id75,bus,unsafe),128)']
-2015-05-10 21:05:22,759 INFO [@EXMPL 150:] Found new Kernel Set
-2015-05-10 21:05:23,987 INFO [@EXMPL 200:] Trying to find delta set of size 4
-2015-05-10 21:05:24,021 INFO [@EXMPL 200:] Trying to find delta set of size 6
-2015-05-10 21:05:24,051 INFO [@EXMPL 200:] Trying to find delta set of size 8
-2015-05-10 21:05:24,081 INFO [@EXMPL 200:] Trying to find delta set of size 10
-2015-05-10 21:05:24,111 INFO [@EXMPL 200:] Trying to find delta set of size 12
-2015-05-10 21:05:24,141 INFO [@EXMPL 200:] Trying to find delta set of size 14
-2015-05-10 21:05:24,178 INFO [@EXMPL 200] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),154)', 'initiatedAt(driving_style(id75,bus,unsafe),157)', 'initiatedAt(driving_style(id75,bus,unsafe),163)', 'initiatedAt(driving_style(id75,bus,unsafe),170)', 'initiatedAt(driving_style(id75,bus,unsafe),181)', 'initiatedAt(driving_style(id75,bus,unsafe),186)', 'initiatedAt(driving_style(id75,bus,unsafe),194)', 'terminatedAt(driving_style(id75,bus,unsafe),155)', 'terminatedAt(driving_style(id75,bus,unsafe),171)', 'terminatedAt(driving_style(id75,bus,unsafe),182)', 'terminatedAt(driving_style(id75,bus,unsafe),190)', 'terminatedAt(driving_style(id75,bus,unsafe),199)', 'terminatedAt(driving_style(id75,bus,unsafe),166)', 'terminatedAt(driving_style(id75,bus,unsafe),160)']
-2015-05-10 21:05:29,083 INFO [@EXMPL 200:] Found new Kernel Set
-2015-05-10 21:05:30,381 INFO [@EXMPL 250:] Trying to find delta set of size 4
-2015-05-10 21:05:30,410 INFO [@EXMPL 250:] Trying to find delta set of size 6
-2015-05-10 21:05:30,440 INFO [@EXMPL 250:] Trying to find delta set of size 8
-2015-05-10 21:05:30,470 INFO [@EXMPL 250:] Trying to find delta set of size 10
-2015-05-10 21:05:30,499 INFO [@EXMPL 250:] Trying to find delta set of size 12
-2015-05-10 21:05:30,529 INFO [@EXMPL 250] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),205)', 'initiatedAt(driving_style(id75,bus,unsafe),210)', 'initiatedAt(driving_style(id75,bus,unsafe),220)', 'initiatedAt(driving_style(id75,bus,unsafe),229)', 'initiatedAt(driving_style(id75,bus,unsafe),235)', 'initiatedAt(driving_style(id75,bus,unsafe),246)', 'terminatedAt(driving_style(id75,bus,unsafe),208)', 'terminatedAt(driving_style(id75,bus,unsafe),224)', 'terminatedAt(driving_style(id75,bus,unsafe),237)', 'terminatedAt(driving_style(id75,bus,unsafe),247)', 'terminatedAt(driving_style(id75,bus,unsafe),231)', 'terminatedAt(driving_style(id75,bus,unsafe),213)']
-2015-05-10 21:05:34,470 INFO [@EXMPL 250:] Found new Kernel Set
-2015-05-10 21:05:35,921 INFO [@EXMPL 300:] Trying to find delta set of size 4
-2015-05-10 21:05:35,952 INFO [@EXMPL 300:] Trying to find delta set of size 6
-2015-05-10 21:05:35,981 INFO [@EXMPL 300:] Trying to find delta set of size 8
-2015-05-10 21:05:36,011 INFO [@EXMPL 300:] Trying to find delta set of size 10
-2015-05-10 21:05:36,041 INFO [@EXMPL 300] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),262)', 'initiatedAt(driving_style(id75,bus,unsafe),270)', 'initiatedAt(driving_style(id75,bus,unsafe),276)', 'initiatedAt(driving_style(id75,bus,unsafe),284)', 'initiatedAt(driving_style(id75,bus,unsafe),293)', 'terminatedAt(driving_style(id75,bus,unsafe),264)', 'terminatedAt(driving_style(id75,bus,unsafe),271)', 'terminatedAt(driving_style(id75,bus,unsafe),280)', 'terminatedAt(driving_style(id75,bus,unsafe),296)', 'terminatedAt(driving_style(id75,bus,unsafe),288)']
-2015-05-10 21:05:39,690 INFO [@EXMPL 300:] Found new Kernel Set
-2015-05-10 21:05:41,081 INFO [@EXMPL 350:] Trying to find delta set of size 4
-2015-05-10 21:05:41,111 INFO [@EXMPL 350:] Trying to find delta set of size 6
-2015-05-10 21:05:41,142 INFO [@EXMPL 350:] Trying to find delta set of size 8
-2015-05-10 21:05:41,172 INFO [@EXMPL 350:] Trying to find delta set of size 10
-2015-05-10 21:05:41,202 INFO [@EXMPL 350:] Trying to find delta set of size 12
-2015-05-10 21:05:41,231 INFO [@EXMPL 350] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),308)', 'initiatedAt(driving_style(id75,bus,unsafe),322)', 'initiatedAt(driving_style(id75,bus,unsafe),330)', 'initiatedAt(driving_style(id75,bus,unsafe),342)', 'initiatedAt(driving_style(id75,bus,unsafe),314)', 'initiatedAt(driving_style(id75,bus,unsafe),300)', 'terminatedAt(driving_style(id75,bus,unsafe),303)', 'terminatedAt(driving_style(id75,bus,unsafe),319)', 'terminatedAt(driving_style(id75,bus,unsafe),327)', 'terminatedAt(driving_style(id75,bus,unsafe),344)', 'terminatedAt(driving_style(id75,bus,unsafe),336)', 'terminatedAt(driving_style(id75,bus,unsafe),312)']
-2015-05-10 21:05:45,564 INFO [@EXMPL 350:] Found new Kernel Set
-2015-05-10 21:05:47,553 INFO [@EXMPL 400:] Trying to find delta set of size 4
-2015-05-10 21:05:47,583 INFO [@EXMPL 400:] Trying to find delta set of size 6
-2015-05-10 21:05:47,613 INFO [@EXMPL 400:] Trying to find delta set of size 8
-2015-05-10 21:05:47,642 INFO [@EXMPL 400:] Trying to find delta set of size 10
-2015-05-10 21:05:47,672 INFO [@EXMPL 400:] Trying to find delta set of size 12
-2015-05-10 21:05:47,702 INFO [@EXMPL 400:] Trying to find delta set of size 14
-2015-05-10 21:05:47,732 INFO [@EXMPL 400:] Trying to find delta set of size 16
-2015-05-10 21:05:47,762 INFO [@EXMPL 400] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),354)', 'initiatedAt(driving_style(id75,bus,unsafe),362)', 'initiatedAt(driving_style(id75,bus,unsafe),364)', 'initiatedAt(driving_style(id75,bus,unsafe),370)', 'initiatedAt(driving_style(id75,bus,unsafe),383)', 'initiatedAt(driving_style(id75,bus,unsafe),394)', 'initiatedAt(driving_style(id75,bus,unsafe),386)', 'initiatedAt(driving_style(id75,bus,unsafe),350)', 'terminatedAt(driving_style(id75,bus,unsafe),351)', 'terminatedAt(driving_style(id75,bus,unsafe),357)', 'terminatedAt(driving_style(id75,bus,unsafe),363)', 'terminatedAt(driving_style(id75,bus,unsafe),366)', 'terminatedAt(driving_style(id75,bus,unsafe),374)', 'terminatedAt(driving_style(id75,bus,unsafe),384)', 'terminatedAt(driving_style(id75,bus,unsafe),390)']
+2015-05-11 18:25:12,730 INFO [@EXMPL 0:] Trying to find delta set of size 4
+2015-05-11 18:25:12,768 INFO [@EXMPL 0:] Trying to find delta set of size 6
+2015-05-11 18:25:12,797 INFO [@EXMPL 0:] Trying to find delta set of size 8
+2015-05-11 18:25:12,825 INFO [@EXMPL 0:] Trying to find delta set of size 10
+2015-05-11 18:25:12,860 INFO [@EXMPL 0:] Trying to find delta set of size 12
+2015-05-11 18:25:12,892 INFO [@EXMPL 0:] Trying to find delta set of size 14
+2015-05-11 18:25:12,921 INFO [@EXMPL 0:] Trying to find delta set of size 16
+2015-05-11 18:25:12,950 INFO [@EXMPL 0] Found delta set: ['initiatedAt(driving_style(id75,bus,unsafe),354)', 'initiatedAt(driving_style(id75,bus,unsafe),362)', 'initiatedAt(driving_style(id75,bus,unsafe),364)', 'initiatedAt(driving_style(id75,bus,unsafe),370)', 'initiatedAt(driving_style(id75,bus,unsafe),383)', 'initiatedAt(driving_style(id75,bus,unsafe),394)', 'initiatedAt(driving_style(id75,bus,unsafe),386)', 'initiatedAt(driving_style(id75,bus,unsafe),350)', 'terminatedAt(driving_style(id75,bus,unsafe),351)', 'terminatedAt(driving_style(id75,bus,unsafe),357)', 'terminatedAt(driving_style(id75,bus,unsafe),363)', 'terminatedAt(driving_style(id75,bus,unsafe),366)', 'terminatedAt(driving_style(id75,bus,unsafe),374)', 'terminatedAt(driving_style(id75,bus,unsafe),384)', 'terminatedAt(driving_style(id75,bus,unsafe),390)']
+2015-05-11 18:25:17,809 INFO [@EXMPL 0:] Found new Kernel Set
