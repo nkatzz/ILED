@@ -17,7 +17,7 @@ This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you a
 
 ## Using ILED (batch mode)
 
-As is custommary in logic program, in the examples below predicates, functions and constant symbols start with a lower-case letter, while variables start with an upper-case letter. To use ``ILED`` you need to provide the following with the input:
+To use ``ILED`` you need to provide the following with the input:
 
 1) Some background knowledge in ASP format. To do so, edit the `/knowledge/bk.lp` file with your own input. The background knowledge may consist of ground facts, as well as non-ground rules that model some domain knowledge.
 
