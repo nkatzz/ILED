@@ -17,17 +17,19 @@ This program comes with ABSOLUTELY NO WARRANTY. This is free software, and you a
 
 ## Using ILED (batch mode)
 
-To use ``ILED`` you need to provide the following with the input:
+As is custommary in logic program, in the examples below predicates, functions and constant symbols start with a lower-case letter, while variables start with an upper-case letter. To use ``ILED`` you need to provide the following with the input:
 
-1) Some background knowledge in ASP format. To do so, edit the `/knowledge/bk.lp` file with your own input.
+1) Some background knowledge in ASP format. To do so, edit the `/knowledge/bk.lp` file with your own input. The background knowledge may consist of ground facts, as well as non-ground rules that model some domain knowledge.
 
-2) A set of mode declarations. To do so, edit the `/knowledge/modes.pl` file with your own input. Mode declarations are a widely used language bias in ILP, specifying the syntax of target rules. For more information, please consult the reference papers mentioned above.
-
-3) A set of training examples. To do so, edit the `/knowledge/examples.pl`. Examples must be provided in the form of ground atoms, wrapped inside an `example` predicate. For instance
+2) A set of training examples. To do so, edit the `/knowledge/examples.pl`. Examples must be provided in the form of ground atoms, wrapped inside an `example` predicate. For instance:
 
 `
 example(father(john,peter)).
 `
+
+3) A set of mode declarations. To do so, edit the `/knowledge/modes.pl` file with your own input. Mode declarations are a widely used language bias in ILP, specifying the syntax of target rules. ``ILED`` uses mode declarations in the same way as well-known ILP systems like [``ALEPH``](http://www.cs.ox.ac.uk/activities/machlearn/Aleph/aleph.html) and [``PROGOL``](http://www.doc.ic.ac.uk/~shm/Papers/InvEnt.pdf) do. Please consult these resources, as well as the the reference papers mentioned above for more information on how to define and use mode declarations for your own learning tasks.
+
+
 
 Unlike most ILP systems, ``ILED`` can learn definitions for target predicates that are different from the predicates used to record the training examples. Such a learning setting is called non-Onservational Predicate Learning (non-OPL) in ILP terminology and handling it is useful in general, but also necessary in some cases. For example, when learning Event Calculus programs, the examples (observartions in time) are recorded using a ``holdsAt`` predicate, while one often is interested in learning conditions under which events are initiated or terminated by the occurrence of other events. Thus target predicates are ``initiatedAt`` and ``terminatedAt`` predicates (the basics of the Event Calculus are covered in [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf)).
 
