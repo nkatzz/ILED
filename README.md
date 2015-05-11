@@ -29,11 +29,11 @@ Unlike most ILP systems, ``ILED`` can learn definitions for target predicates th
 
 Given the general non-OPL setting that ``ILED`` assumes, the predicate structure used for representing the examples must also be provided with the input. These predicates may be more than one and they are "declared" as abstractions of actual examples, i.e. non-ground logical atoms in a python list (`example_patterns`) in `/src/core.py`. Edit this field in the source code accordingly. For instance if the examples are of the form `example(father(john,peter))` then the example pattern that has to be declared is `father(X,Y)`. 
 
-Once you have prepared the input, you can run the /src/main.py script, indicating that you want to perform "batch" learning, by providing all examples at once and trying to learn a hypothesis:
+Once you have prepared the input, you can run the /src/main.py script, indicating that you want to perform "batch" learning, i.e. learn from all the examples at once:
 
 `/src$ python main.py mode=batch`
 
-The output hypothesis is written in ``./theory.lp``. This is a simple way to use ``ILED`` on toy examples or small domains. Actually, when run in batch mode ``ILED`` is an implementation of the ``XHAIL`` algorithm (`eXtended Hybrid Abductive Inductive Learning` -- see the second paper mentioned above for details). The directory ``./knowledge/ecoli`` contains background knowledge, mode declarations and training examples for running ILED in batch mode on an example provided in 
+The output hypothesis is written in ``/theory.lp``. This is a simple way to use ``ILED`` on toy examples or small domains. Actually, when run in batch mode ``ILED`` is an implementation of the ``XHAIL`` algorithm (`eXtended Hybrid Abductive Inductive Learning` -- see the second paper mentioned above for details). The directory ``/knowledge/ecoli`` contains background knowledge, mode declarations and training examples for running ILED in batch mode on an example provided in 
 
 * O. Ray. Nonmonotonic Abductive Inductive Learning. Journal of Applied Logic 7(3): 329-340, 2009.
 
