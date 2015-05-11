@@ -17,11 +17,14 @@ import argparse
 
 
 class core():
-    """
+    
+     
+    
+    
     example_patterns = ['holdsAt(fluent(X,Y,Z),T)'] # CAVIAR
+    
+    
     """
-    
-    
     example_patterns = [#'holdsAt(passenger_satisfaction(X,Y,Z),T)',
                         #'holdsAt(driving_quality(X,Y,Z),T)',
                         'holdsAt(driving_style(X,Y,Z),T)',
@@ -33,7 +36,7 @@ class core():
                         #'holdsAt(noise_level(X,Y,Z),T)',
                         #'holdsAt(internal_temperature(X,Y,Z),T)',
                         ]
-    
+    """
     example_constraints_cover = []
     
     heuristic_example_constraints_cover = []
