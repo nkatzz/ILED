@@ -99,8 +99,8 @@ def batchMode():
                     set_cover_search=False,
                     clause_level_search=False,
                     incremental_solve=False) 
-     print('\nTheory:\n')
-     u.see(newclauses)  
+    print('\nTheory:\n')
+    u.see(newclauses)  
         
         
 if __name__ == "__main__":
