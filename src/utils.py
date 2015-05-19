@@ -16,7 +16,7 @@ gl = core.global_vals
 #def revise(is_new_example,*debug):
 def revise(**kwargs):
     hs,scs,cls = kwargs['heuristic_search'],kwargs['set_cover_search'],kwargs['clause_level_search']
-    special_search = hs or scs or cls
+    special_search =  scs or cls
     if not special_search:
         gl.use_dict = {}
         is_new_example = kwargs['is_new_example'] 
@@ -516,22 +516,53 @@ def analyze_use_try(kernel,previous_theory,**kwargs):
     optional = '\n'.join(optional) if optional != [] else ''  
     max_clauses = max(len(kernel),len(previous_theory))     
     if not 'incremental_search' in kwargs:     
-        #use_choices = '%s\n\n%s'%(use2_choices,use3_choices)
-
-        content = '%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s'\
-        %(optional, \
-        '\n'.join(analyze_prior_theory), \
-        'clauseIndex(1..%s).'%(str(max_clauses)), \
-        'literalIndex(0..%s).'%(str(max_clause_length)), \
-        use2_choices, \
-        use3_choices, \
-        '{use(I,J)}:-clauseIndex(I),literalIndex(J).', \
-        '{use(I,J,K)}:-clauseIndex(I),clauseIndex(J),literalIndex(K).', \
-        '#minimize{use(I,J),use(I,J,K)}.', \
-        ':- use(I,J), not use(I,0).', \
-        '#hide.', \
-        '#show use/2.', \
-        '#show use/3.')    
+        # Generate constraints and directives for heuristic search:
+        # Minimize the total number of use/2 atoms, posNotCovered atoms and negsCovered atoms:
+        posNotCoveredClauses = map(lambda x: "posNotCovered(%s) :-\n    example(%s), not %s."%(x,x,x),gl.example_patterns)
+        negsCoveredClauses = map(lambda x: "negsCovered(%s) :-\n    %s, not example(%s)."%(x,x,x),gl.example_patterns)
+        posNotCoveredAtoms = map(lambda x: "posNotCovered(%s)"%(x),gl.example_patterns)
+        negsCoveredAtoms = map(lambda x: "negsCovered(%s)"%(x),gl.example_patterns)
+        if gl.runargs["coverage"] == "heuristic": 
+            content = '%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s'\
+            %(optional, \
+            '\n'.join(analyze_prior_theory), \
+            'clauseIndex(1..%s).'%(str(max_clauses)), \
+            'literalIndex(0..%s).'%(str(max_clause_length)), \
+            use2_choices, \
+            use3_choices, \
+            '{use(I,J)}:-clauseIndex(I),literalIndex(J).', \
+            '{use(I,J,K)}:-clauseIndex(I),clauseIndex(J),literalIndex(K).', \
+            '\n'.join(posNotCoveredClauses),\
+            '\n'.join(negsCoveredClauses),\
+            '#minimize{use(I,J),use(I,J,K),%s,%s}.'%(','.join(posNotCoveredAtoms),','.join(negsCoveredAtoms)), \
+            ':- use(I,J), not use(I,0).', \
+            '#hide.', \
+            '#show use/2.', \
+            '#show use/3.')
+            
+            # Also clear all other constraints:
+            
+            with open(gl.example_coverage_constr,'w') as f:
+                pass
+            
+        else:  # perfect fit to the examples      
+            content = '%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s'\
+            %(optional, \
+            '\n'.join(analyze_prior_theory), \
+            'clauseIndex(1..%s).'%(str(max_clauses)), \
+            'literalIndex(0..%s).'%(str(max_clause_length)), \
+            use2_choices, \
+            use3_choices, \
+            '{use(I,J)}:-clauseIndex(I),literalIndex(J).', \
+            '{use(I,J,K)}:-clauseIndex(I),clauseIndex(J),literalIndex(K).', \
+            '#minimize{use(I,J),use(I,J,K)}.', \
+            ':- use(I,J), not use(I,0).', \
+            '#hide.', \
+            '#show use/2.', \
+            '#show use/3.')
+            
+            # Also clear all other constraints:
+            
     else:
         if kwargs['incremental_search']:
             if 'preserve' in kwargs: 
@@ -864,10 +895,8 @@ def get_delta(**kwargs):
         return model    
        
         
-
+"""
 def write_abd_directives(directives,model_count):
-    #gl = core.core().globals
-    #gl = core.global_vals
     g = lambda x: '0{%s}%s.\n'%(x,str(model_count))
     k = lambda x: '#show %s.'%(x)
     show_directives = [x.split(':')[0] for x in directives]
@@ -876,6 +905,22 @@ def write_abd_directives(directives,model_count):
         f.write('#hide.\n')
         f.write('\n'.join(map(k,show_directives)))
     f.close()    
+"""
+    
+def write_abd_directives(directives,model_count):
+    varmodes = gl.modeHsvarbed
+    minimize = "#minimize{ %s }.\n\n"%(",".join(varmodes))
+    show = map(lambda x: "#show %s."%(x),varmodes)
+    g = lambda x: '{%s}.\n'%(x)
+    #k = lambda x: '#show %s.'%(x)
+    #show_directives = [x.split(':')[0] for x in directives]
+    with open(gl.abdinp,'w') as f:
+        f.write(''.join(map(g,directives)))
+        f.write(minimize)
+        f.write('#hide.\n\n')
+        f.write('\n'.join(show))
+    f.close() 
+    
 
 def get_head_in_terms(atom):
     modes = gl.modeh
@@ -1166,4 +1211,7 @@ def tideup(newclauses,retained,specialized,**kwargs):
     write_to_file(gl.prior_theory_path,x)
     """                  
     
+
+
+
 

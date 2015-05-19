@@ -8,7 +8,39 @@ import utils as u
 import asp
 import utils
 import sys
-import argparse
+#import argparse
+
+"""
+To Do:
+
+1. Pass args to the main learning function:
+  - DB name
+  - Granularity ?
+  - example pattern
+  - running modes? (experiments, sequential run, runs on randomly exmaples...)
+  
+2. Implement support update as in paper (hopefully this will fix all remaining 
+   support set problems)  
+
+3. Print informative statements throughout execution
+
+4. CROSS-VALIDATION 
+
+5. FIX +/- mode declarations (!!!)
+
+6. Implement a file-based (runs simply XHAIL) and a db-based (runs ILED) version.
+   Have some examples for the file based and an easy to install test for the 
+   database version.  
+
+
+"""
+"""
+Fix mongo connectivity issues:
+Manually remove the lockfile: sudo rm /var/lib/mongodb/mongod.lock
+Run the repair script: sudo -u mongodb mongod -f /etc/mongodb.conf --repair
+tart your MongoDB server with sudo start mongodb and verify it is running with sudo 
+status mongodb and by trying to connect to it with mongo test.
+"""
 
 
 gl = core.global_vals
@@ -40,6 +72,10 @@ def learn(**kwargs):
     #for i in time_interval:
     #for i in range(1,100000):
     for i in range(1,1000000):    
+        
+    #for i in (110,120):    
+        #i = 250
+        #print(i)
         if i == 1672:
             stop = 'stop'
         if utils.get_example(i):
@@ -99,8 +135,8 @@ def batchMode():
                     set_cover_search=False,
                     clause_level_search=False,
                     incremental_solve=False) 
-    print('\nTheory:\n')
-    u.see(newclauses)  
+    print('\n')                  
+    u.see(newclauses)               
         
         
 if __name__ == "__main__":
@@ -118,14 +154,16 @@ if __name__ == "__main__":
         learn(clause_level_search=True) 
     elif 'mode' in args: # demo=caviar or demo=ctm
         if args['mode'] == 'batch':
-            batchMode()
+            gl.runargs.update({"coverage":"heuristic"})
+            gl.runargs.update({"mode":"batch"})
+            batchMode() # always use heuristic in batch mode (see the method)
     else:    
         learn()
         #print('What you want to do?')    
     #if 'set_cover_search' in args and args['set_cover_search']:
     #    learn(set_cover_search=True)
     #else:
-    #    learn(set_cover_search=False)         
+    #    learn(set_cover_search=False)          
 
 
 

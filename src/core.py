@@ -9,6 +9,9 @@ import logging
 import sys
 import argparse
 
+import re
+from compiler.ast import flatten
+
 
 # Input to the main learning function:
 # DB name
@@ -18,25 +21,11 @@ import argparse
 
 class core():
     
-     
+    runargs = {"mode":"incremental","cover-search":False,"coverage":"perfect-fit",
+               "clause_level_search":False,"incremental_solve":False,"debug":False}
     
-    
-    example_patterns = ['holdsAt(fluent(X,Y,Z),T)'] # CAVIAR
-    
-    
-    """
-    example_patterns = [#'holdsAt(passenger_satisfaction(X,Y,Z),T)',
-                        #'holdsAt(driving_quality(X,Y,Z),T)',
-                        'holdsAt(driving_style(X,Y,Z),T)',
-                        #'holdsAt(punctuality(X,Y,Z),T)',
-                        #'holdsAt(sharp_turn(X,Y,Z),T)',
-                        #'holdsAt(abrupt_acceleration(X,Y,Z),T)',
-                        #'holdsAt(abrupt_deceleration(X,Y,Z),T)',
-                        #'holdsAt(passenger_density(X,Y,Z),T)',
-                        #'holdsAt(noise_level(X,Y,Z),T)',
-                        #'holdsAt(internal_temperature(X,Y,Z),T)',
-                        ]
-    """
+    example_patterns = []
+
     example_constraints_cover = []
     
     heuristic_example_constraints_cover = []
@@ -65,7 +54,7 @@ class core():
     
     #db_name,db_collection = 'examples-3-8-2013_granularity_50','examples'
     #db_name,db_collection = 'caviar-synthetic_granularity_100','examples'
-    db_name,db_collection = 'CTM-G-50','examples'
+    db_name,db_collection = 'caviar-10','examples'
     #db_name,db_collection = 'CTM-granularity-10','examples'
     
     db,collection,globals = None,None,None
@@ -82,7 +71,11 @@ class core():
     
     examples = os.path.join(os.path.dirname(cwd),'knowledge','examples.lp') 
     
-    modes = os.path.join(os.path.dirname(cwd),'knowledge','modes.pl') 
+    modes = os.path.join(os.path.dirname(cwd),'knowledge','modes') 
+    
+    modeHsvarbed = []
+    
+    modeBsvarbed = []
     
     clingo = os.path.join(os.path.dirname(cwd),'lib','./clingo') 
     
@@ -121,7 +114,7 @@ class core():
     vardepth = 4
     
     def __init__(self,**kwargs):
-        log =os.path.join(os.path.dirname(self.cwd),'logger')
+        log = os.path.join(os.path.dirname(self.cwd),'logger')
         os.remove(log) if os.path.exists(log) else None
         #os.remove(os.path.join(os.path.dirname(self.cwd),'logger'))
         self.init_mongo()
@@ -175,8 +168,9 @@ class core():
     def parse_modes(self):
         """ get mode declarations """
         f = open(self.modes,'r')
-        g1 = lambda x: x.replace(" ","").split('modeh(*,')[1][:-1]
-        g2 = lambda x: x.replace(" ","").split('modeb(*,')[1][:-1]
+        g1 = lambda x: x.replace(" ","").split('modeh(')[1][:-1]
+        g2 = lambda x: x.replace(" ","").split('modeb(')[1][:-1]
+        g3 = lambda x: x.replace(" ","").split('examplePattern(')[1][:-1] 
         m = [x.replace('.','').strip() for x in f.read().splitlines() \
                        if not x.startswith(':-') and not x.startswith('%') and 'modeh' in x]
         self.modeh = map(g1,m)
@@ -184,7 +178,52 @@ class core():
         m = [x.replace('.','').strip() for x in f.read().splitlines() \
                       if not x.startswith(':-') and not x.startswith('%') and 'modeb' in x]
         self.modeb = map(g2,m)
+        f = open(self.modes,'r')
+        m = [x.replace('.','').strip() for x in f.read().splitlines() \
+                      if not x.startswith(':-') and not x.startswith('%') and 'examplePattern' in x]
+        m = [self.variabilize_mode(x) for x in m]
+        self.example_patterns = map(g3,m)
+        # Variabilize modes too and keep them in the core
+        self.modeHsvarbed = [self.variabilize_mode(x) for x in self.modeh]
+        self.modeBsvarbed = [self.variabilize_mode(x) for x in self.modeb]
+        
           
+     
+    def variabilize_mode(self,mode):
+        """Returns the variabilized mode only."""
+        words = '[A-Za-z0-9_]+'
+        
+        plmrks = lambda x,y: re.findall('\\'+str(y)+words,x)
+        inp = plmrks(mode,'+')
+        out = plmrks(mode,'-')
+        gr = plmrks(mode,'#')
+        all = flatten([inp,out,gr])
+        d,v = {},0   
+        for mo in all:
+            if mo in d:
+                #n = d[mo]
+                mode = self.replace_nth(mode,mo,'X'+str(v),1) 
+                v += 1
+                d[mo] += 1
+            else:
+                mode = self.replace_nth(mode,mo,'X'+str(v),1) 
+                v += 1
+                d[mo] = 1 
+        return mode      
+    
+    def find_nth(self,source, target, n):
+        num = 0
+        start = -1
+        while num < n:
+            start = source.find(target, start+1)
+            if start == -1: return -1
+            num += 1
+        return start
+
+    def replace_nth(self,source, old, new, n):
+        p = self.find_nth(source, old, n)
+        if n == -1: return source
+        return source[:p] + new + source[p+len(old):]            
         
     def init_logger(self):
         """ initialize logger """  
@@ -226,6 +265,9 @@ def parseargs():
     args = parser.parse_args(sys.argv)
     print(args)
     #print(args.accumulate(args))  
+ 
+
+ 
  
 def setdb(dbname):
     global_vals.db_name = dbname     
