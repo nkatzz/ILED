@@ -1,5 +1,6 @@
-0{initiatedAt(driving_style(X0,X1,X3),X2):vehicleType(X1):vehicleId(X0):fv_driving_style(X3):ttime(X2)}8.
-0{terminatedAt(driving_style(X0,X1,X3),X2):vehicleType(X1):vehicleId(X0):fv_driving_style(X3):ttime(X2)}8.
+{happens(use(X1),X0):sugar(X1):time(X0)}.
+#minimize{ happens(use(X1),X0) }.
+
 #hide.
-#show initiatedAt(driving_style(X0,X1,X3),X2).
-#show terminatedAt(driving_style(X0,X1,X3),X2).
+
+#show happens(use(X1),X0).

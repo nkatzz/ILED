@@ -60,9 +60,15 @@ def abd(**kwargs):
     command = ' '.join(options)
     out = os.popen(command).read().split('.')
     
-    #out = cmd(options)
-    #out = out.split('.')
-    out = [x.strip() for x in out if not x.strip() == '']
+
+    #out = [x.strip() for x in out if not x.strip() == '']
+    
+    out = filter(lambda x: 'OPTIMUM FOUND' not in x,out)
+    ##out = out[len(out)-1].split('.') # get the last one, which is the optimum
+    out = filter(lambda x: not x.strip() in '',[x.strip() for x in out ])
+    
+    
+    
     if special_search: # re-write the soft constraints
         covfile = gl.example_coverage_constr  # use the hard example coverage constraints
         covconstr = gl.heuristic_example_constraints_cover

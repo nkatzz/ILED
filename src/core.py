@@ -71,7 +71,7 @@ class core():
     
     examples = os.path.join(os.path.dirname(cwd),'knowledge','examples.lp') 
     
-    modes = os.path.join(os.path.dirname(cwd),'knowledge','modes') 
+    modes = os.path.join(os.path.dirname(cwd),'knowledge','modes.pl') 
     
     modeHsvarbed = []
     

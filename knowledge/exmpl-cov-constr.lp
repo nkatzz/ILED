@@ -1,2 +1,2 @@
-:- example(holdsAt(driving_style(X,Y,Z),T)), not holdsAt(driving_style(X,Y,Z),T).
-:- holdsAt(driving_style(X,Y,Z),T), not example(holdsAt(driving_style(X,Y,Z),T)).
+:- example(holdsAt(available(X),Y)), not holdsAt(available(X),Y).
+:- holdsAt(available(X),Y), not example(holdsAt(available(X),Y)).

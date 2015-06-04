@@ -154,7 +154,10 @@ if __name__ == "__main__":
         learn(clause_level_search=True) 
     elif 'mode' in args: # demo=caviar or demo=ctm
         if args['mode'] == 'batch':
-            gl.runargs.update({"coverage":"heuristic"})
+            #gl.runargs.update({"coverage":"heuristic"}) # I need to take a look at this. I think that 
+                                                         # there must be separate minimize statements
+                                                         # for the use/2 atoms, posNotCovered/1 and negsCovered/1
+                                                         # in order to have optimal results.                 
             gl.runargs.update({"mode":"batch"})
             batchMode() # always use heuristic in batch mode (see the method)
     else:    

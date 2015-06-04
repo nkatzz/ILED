@@ -41,7 +41,7 @@ related to the metabolism of the bacterium E. coli. Please consult the above pap
 
 1) Copy the contents of ``/knowledge/ecoli/bk.lp``, ``/knowledge/ecoli/modes.pl`` and ``/knowledge/ecoli/examples.lp`` into the corresponding files under the ``/knowledge`` directory of ``ILED``'s source code.
 
-2) Edit `/src/core.py` so that `example_patterns` looks like this: ``example_patterns = ['holdsAt(available(S),T)']``
+2) Add the following to modes.pl (if not there): examplePattern(holdsAt(available(S),T)).
  
 3) Run `/src$ python main.py mode=batch`. 
 

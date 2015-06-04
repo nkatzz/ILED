@@ -1,285 +1,65 @@
+%-------------------------
+%% Event Calculus axioms: 
+%-------------------------
 
-holdsAt(F,Te) :-
-       initiatedAt(F,Ts),
-       Te = Ts + 1,
-       ttime(Ts),ttime(Te).
+% An fluent F holds at time T if an event E 
+% happens at some time point S prior to T,
+% such that E initiates F at time S, and also
+% F has not been clipped (interrupted) in the
+% time interval [S,T].   
+holdsAt(F,T) :- 
+     happens(E,S), 
+     S<T, 
+     time(S),time(T),
+     initiates(E,F,S), 
+     not clipped(S,F,T). 
 
-holdsAt(F,Te) :-
-       holdsAt(F,Ts),
-       not terminatedAt(F,Ts),
-       Te = Ts + 1,
-       ttime(Ts),ttime(Te).
+% Fluent F is clipped in the time interval [S,T] 
+% if an event E happens at some time point R 
+% in this interval, such that E terminates F at R 
+clipped(S,F,T) :-
+     happens(E,R), 
+     S<R, R<T,
+     time(S),time(R),time(T),  
+     terminates(E,F,R). 
 
+% Fluent F holds at time T if it holds at time 0
+% (the begining of time) and it has not been 
+% clipped since.
 holdsAt(F,T) :-
-       starttime(T),
-       example(holdsAt(F,T)).
- 
-% Extra Background knowledge start:
+     initially(F), 
+     not clipped(0,F,T),
+     time(T).
+    
+%% Time ranges from 0 to 9:
+time(0..9). 
 
-terminatedAt(sharp_turn(X2,X1,sharp),X3) :- 
-        happensAt(sharp_turn_end(X2,X1,sharp),X3).
-terminatedAt(sharp_turn(X3,X1,very_sharp),X2) :- 
-        happensAt(sharp_turn_end(X3,X1,very_sharp),X2).
-initiatedAt(sharp_turn(X2,X1,sharp),X3) :- 
-        happensAt(sharp_turn_start(X2,X1,sharp),X3).
-initiatedAt(sharp_turn(X3,X1,very_sharp),X2) :- 
-        happensAt(sharp_turn_start(X3,X1,very_sharp),X2).
+%% Definition of events:
+event(add(G)) :- sugar(G).
+event(use(G)) :- sugar(G). 
 
+%% Definitions of fluents:
+fluent(available(G)) :- sugar(G). 
 
-terminatedAt(abrupt_acceleration(X2,X1,abrupt),X3) :- 
-        happensAt(abrupt_acceleration_end(X2,X1,abrupt),X3).
-terminatedAt(abrupt_acceleration(X2,X1,very_abrupt),X3) :- 
-        happensAt(abrupt_acceleration_end(X2,X1,very_abrupt),X3).
-initiatedAt(abrupt_acceleration(X2,X1,abrupt),X3) :- 
-        happensAt(abrupt_acceleration_start(X2,X1,abrupt),X3).
-initiatedAt(abrupt_acceleration(X3,X1,very_abrupt),X2) :- 
-        happensAt(abrupt_acceleration_start(X3,X1,very_abrupt),X2).
+%% Lactose and glucose are sugars:
+sugar(lactose).
+sugar(glucose). 
 
+%% Adding a sugar initiates its availability:
+initiates(add(G),available(G),T) :- sugar(G), time(T).
 
-terminatedAt(abrupt_deceleration(X3,X1,abrupt),X2) :- 
-        happensAt(abrupt_deceleration_end(X3,X1,abrupt),X2).
-terminatedAt(abrupt_deceleration(X2,X1,very_abrupt),X3) :- 
-        happensAt(abrupt_deceleration_end(X2,X1,very_abrupt),X3).
-initiatedAt(abrupt_deceleration(X3,X1,abrupt),X2) :- 
-        happensAt(abrupt_deceleration_start(X3,X1,abrupt),X2).
-initiatedAt(abrupt_deceleration(X3,X1,very_abrupt),X2) :- 
-        happensAt(abrupt_deceleration_start(X3,X1,very_abrupt),X2).
+%% Consuming a sugar terminates it availability:
+ terminates(use(G),available(G),T) :- sugar(G), time(T). 
 
-% Extra Background knowledge end:
+%% Integrity constraint: A non-available sugar cannot be consumed:
+:- happens(use(G),T), not holdsAt(available(G), T). 
+                  
+%% At time 0 we add lactose and glucose (and let the system eveolve):
+happens(add(lactose),0).
+happens(add(glucose),0).
 
-
-
-
-
-
-
-
-vehicleId(VehicleId):-
-        happensAt(abrupt_acceleration_start(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(abrupt_acceleration_end(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(abrupt_deceleration_start(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(abrupt_deceleration_end(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(sharp_turn_start(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(sharp_turn_end(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(internal_temperature_change(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(noise_level_change(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(passenger_density_change(VehicleId,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(stop_enter(VehicleId,_,_,_),_).
-vehicleId(VehicleId):-
-        happensAt(stop_leave(VehicleId,_,_,_),_).
-
-vehicleType(VehicleType):-
-        happensAt(abrupt_acceleration_start(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(abrupt_acceleration_end(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(abrupt_deceleration_start(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(abrupt_deceleration_end(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(sharp_turn_start(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(sharp_turn_end(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(internal_temperature_change(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(noise_level_change(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(passenger_density_change(_,VehicleType,_),_).
-vehicleType(VehicleType):-
-        happensAt(stop_enter(_,VehicleType,_,_),_).
-vehicleType(VehicleType):-
-        happensAt(stop_leave(_,VehicleType,_,_),_).
-
-evalue(V):-
-        happensAt(abrupt_acceleration_start(_,_,V),_).
-evalue(V):-
-        happensAt(abrupt_acceleration_end(_,_,V),_).
-evalue(V):-
-        happensAt(abrupt_deceleration_start(_,_,V),_).
-evalue(V):-
-        happensAt(abrupt_deceleration_end(_,_,V),_).
-evalue(V):-
-        happensAt(internal_temperature_change(_,_,V),_).
-evalue(V):-
-        happensAt(noise_level_change(_,_,V),_).
-evalue(V):-
-        happensAt(passenger_density_change(_,_,V),_).
-evalue(V):-
-        happensAt(sharp_turn_start(_,_,V),_).
-evalue(V):-
-        happensAt(sharp_turn_end(_,_,V),_).
-evalue(V):-
-        happensAt(stop_enter(_,_,_,V),_).
-evalue(V):-
-        happensAt(stop_leave(_,_,_,V),_).
-
-
-happensAt(my_stop_enter(VId,VType,stopId,Value),T):-
-        happensAt(stop_enter(VId,VType,_,Value),T). 
-
-happensAt(my_stop_leave(VId,VType,stopId,Value),T):-
-        happensAt(stop_leave(VId,VType,_,Value),T).
-
-
-stopId(S):-
-        happensAt(my_stop_enter(_,_,S,_),_).
-stopId(S):-
-        happensAt(my_stop_leave(_,_,S,_),_).
-
-ttime(T):-
-        happensAt(_,T).
-ttime(T):-
-        example(holdsAt(_,T)).
-
-not_happensAt(abrupt_acceleration_start(X,Y,Z),T):-
-        not happensAt(abrupt_acceleration_start(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_acceleration(Z),ttime(T).
-
-not_happensAt(abrupt_acceleration_end(X,Y,Z),T):-
-        not happensAt(abrupt_acceleration_end(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_acceleration(Z),ttime(T).
-
-not_happensAt(abrupt_deceleration_start(X,Y,Z),T):-
-        not happensAt(abrupt_deceleration_start(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_deceleration(Z),ttime(T).
-
-not_happensAt(abrupt_deceleration_end(X,Y,Z),T):-
-        not happensAt(abrupt_deceleration_end(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_deceleration(Z),ttime(T).
-
-not_happensAt(internal_temperature_change(X,Y,Z),T):-
-        not happensAt(internal_temperature_change(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_internal_temperature(Z),ttime(T).
-
-not_happensAt(noise_level_change(X,Y,Z),T):-
-        not happensAt(noise_level_change(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_internal_temperature(Z),ttime(T).
-
-not_happensAt(passenger_density_change(X,Y,Z),T):-
-        not happensAt(passenger_density_change(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_passenger_density(Z),ttime(T).
-
-not_happensAt(sharp_turn_start(X,Y,Z),T):-
-        not happensAt(sharp_turn_start(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_passenger_density(Z),ttime(T).
-
-not_happensAt(sharp_turn_end(X,Y,Z),T):-
-        not happensAt(sharp_turn_end(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_sharp_turn(Z),ttime(T).
-
-not_happensAt(my_stop_enter(X,Y,stopId,Z),T):-
-        not happensAt(my_stop_enter(X,Y,stopId,Z),T),
-        vehicleId(X),vehicleType(Y),fv_my_stop_enter(Z),ttime(T).
-
-not_happensAt(my_stop_leave(X,Y,stopId,Z),T):-
-        not happensAt(my_stop_leave(X,Y,stopId,Z),T),
-        vehicleId(X),vehicleType(Y),fv_my_stop_leave(Z),ttime(T).
-
-
-
-not_holdsAt(sharp_turn(X,Y,Z),T):-
-        not holdsAt(sharp_turn(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_sharp_turn(Z),ttime(T).
-
-not_holdsAt(abrupt_acceleration(X,Y,Z),T):-
-        not holdsAt(abrupt_acceleration(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_acceleration(Z),ttime(T).  
-
-not_holdsAt(abrupt_deceleration(X,Y,Z),T):-
-        not holdsAt(abrupt_deceleration(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_abrupt_deceleration(Z),ttime(T).
-
-not_holdsAt(passenger_density(X,Y,Z),T):-
-        not holdsAt(passenger_density(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_passenger_density(Z),ttime(T).
-
-not_holdsAt(noise_level(X,Y,Z),T):-
-        not holdsAt(noise_level(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_noise_level(Z),ttime(T).
-
-not_holdsAt(internal_temperature(X,Y,Z),T):-
-        not holdsAt(internal_temperature(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_internal_temperature(Z),ttime(T).  
-
-not_holdsAt(driving_quality(X,Y,Z),T):-
-        not holdsAt(driving_quality(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_driving_quality(Z),ttime(T).
-
-not_holdsAt(driving_style(X,Y,Z),T):-
-        not holdsAt(driving_style(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_driving_style(Z),ttime(T).
-
-not_initiatedAt(driving_style(X,Y,Z),T):-
-        not initiatedAt(driving_style(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_driving_style(Z),ttime(T).
-
-not_terminatedAt(driving_style(X,Y,Z),T):-
-        not terminatedAt(driving_style(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_driving_style(Z),ttime(T).
-
-not_holdsAt(punctuality(X,Y,Z),T):-
-        not holdsAt(punctuality(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_punctuality(Z),ttime(T).
-
-not_initiatedAt(punctuality(X,Y,Z),T):-
-        not initiatedAt(punctuality(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_punctuality(Z),ttime(T).
-
-not_terminatedAt(punctuality(X,Y,Z),T):-
-        not terminatedAt(punctuality(X,Y,Z),T),
-        vehicleId(X),vehicleType(Y),fv_punctuality(Z),ttime(T).
-
- 
-fv_passenger_satisfaction(reducing).
-
-fv_driving_quality(low).
-
-fv_driving_style(unsafe).
-
-fv_passenger_density(high).
-fv_passenger_density(low).
-
-fv_noise_level(high).
-fv_noise_level(low).
-
-fv_sharp_turn(sharp).
-fv_sharp_turn(very_sharp).
-
-fv_punctuality(punctual).
-fv_punctuality(non_punctual).
-
-fv_abrupt_acceleration(abrupt).
-fv_abrupt_acceleration(very_abrupt).
-fv_abrupt_deceleration(abrupt).
-fv_abrupt_deceleration(very_abrupt).
-
-fv_internal_temperature(very_cold).
-fv_internal_temperature(cold).
-fv_internal_temperature(normal).
-fv_internal_temperature(warm).
-fv_internal_temperature(very_warm).
-
-fv_my_stop_enter(late).
-fv_my_stop_enter(early).
-fv_my_stop_enter(scheduled).
-fv_my_stop_leave(late).
-fv_my_stop_leave(early).
-fv_my_stop_leave(scheduled).
-
-
-
-
-#hide.
-	
+%% This is not really necessary, not holdsAt(X,Y) may be used instead.
+not_holdsAt(X,Y):- 
+   not holdsAt(X,Y),fluent(X),time(Y). 
 
 
