@@ -58,3 +58,14 @@ The CTM dataset was created in the context of the [PRONTO project](http://www.ic
 #### Activity Recognition (CAVIAR)
 
 See [this link](http://homepages.inf.ed.ac.uk/rbf/CAVIARDATA1/) for information on the CAVIAR dataset. You can also find more information on the dataset itself and the way it has been used for learning with ``ILED`` in [ILED's technical report](http://arxiv.org/pdf/1402.5988v2.pdf). You can download data plus instructions on how to perform learning with ``ILED`` from [this link](http://users.iit.demokritos.gr/~nkatz/ILED-data/CAVIAR.tar.gz).
+
+
+
+
+## Related Software
+
+* [RTEC](https://github.com/aartikis/RTEC): Run-Time Event Calculus. RTEC is an extension of the Event Calculus. It is a highly-scalable logic programming language for representing and reasoning about events and their effects.
+
+* [LoMRF](https://github.com/anskarl/LoMRF): Logical Markov Random Fields: LoMRF is a library for Markov Logic Networks that supports Event Calculus reasoning under uncertainty.
+
+
